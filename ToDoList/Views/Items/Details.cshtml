@@ -1,20 +1,18 @@
+@model ToDoList.Models.Item
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
-    <title>Parcels</title>
+    <title>To Do List</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <link href="~/css/styles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
     <div class="container">
-<h1>To Do List Item Details: </h1>
-
-<h2>@Model["item"].Description</h2>
-<h3>Category: @Model["category"].Name</h3>
-
-<a href='/categories/@Model["category"].Id/items/new'>Add another item</a>
-<a href='/categories'>View all categories</a>
-</div>
+    <h2>Item Details</h2>
+    <hr />
+    <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)<h3>
+    <p>@Html.ActionLink("Back to list", "Index")</p>
+    </div>
 </body>
 </html>

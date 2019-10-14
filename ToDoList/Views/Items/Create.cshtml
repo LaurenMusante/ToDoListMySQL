@@ -1,0 +1,22 @@
+@model ToDoList.Models.Item
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>To Do List</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+    <link href="~/css/styles.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="container">
+        <h4>Add a new task</h4>
+        @using (Html.BeginForm())
+        {
+            @Html.LabelFor(model => model.Description)
+            @Html.TextBoxFor(model => model.Description)
+            <input type="submit" value="Add new task" />
+        }
+        <p>@Html.ActionLink("Show all items", "Index")</p>
+    </div>
+</body>
+</html>
