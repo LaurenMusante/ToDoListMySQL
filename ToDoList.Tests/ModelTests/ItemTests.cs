@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using ToDoList.Models;
 using System;
+using MySql.Data.MySqlClient;
 
 namespace ToDoList.Tests
 {
@@ -12,6 +13,12 @@ namespace ToDoList.Tests
     public void Dispose()
     {
       Item.ClearAll();
+    }
+
+      public ItemTest()
+    {
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=epicodus;port=3306;database=to_do_list_test;";
+      // this line ensures that the tests are linked to the test database, not the dev database
     }
 
     [TestMethod]
