@@ -2,40 +2,15 @@ using System.Collections.Generic;
 
 namespace ToDoList.Models
 {
-  public class Category
-  {
-    private static List<Category> _instances = new List<Category> { };
-    public string Name { get; set; }
-    public int Id { get; }
-    public List<Item> Items { get; set; }
-
-    public Category(string categoryName)
+    public class Category
     {
-      Name = categoryName;
-      _instances.Add(this);
-      Id = _instances.Count;
-      Items = new List<Item> { };
-    }
+        public Category()
+        {
+            this.Items = new HashSet<Item>(); //A HashSet is an unordered collection of unique elements. We create a HashSet of Items in the constructor to help avoid exceptions when no records exist in the "many" side of the relationship.
+        }
 
-    public static void ClearAll()
-    {
-      _instances.Clear();
+        public int CategoryId { get; set; }
+        public string Name { get; set; }
+        public virtual ICollection<Item> Items { get; set; } //We declare Items as an instance of ICollection, a generic interface built into the .NET framework. We use ICollection specifically because Entity requires it.
     }
-
-    public static List<Category> GetAll()
-    {
-      return _instances;
-    }
-
-    public static Category Find(int searchId)
-    {
-      return _instances[searchId - 1];
-    }
-
-
-    public void AddItem(Item item)
-    {
-      Items.Add(item);
-    }
-  }
 }

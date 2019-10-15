@@ -3,6 +3,7 @@ using ToDoList.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ToDoList.Controllers
 {
@@ -17,13 +18,14 @@ namespace ToDoList.Controllers
 
         public ActionResult Index()
         {
-            List<Item> model = _db.Items.ToList();
+            List<Item> model = _db.Items.Include(items => items.Category).ToList(); //We can utilize eager loading by using Entity's built-in Include() methodThis basically states the following: for each Item in the database, include the Category it belongs to and then put all the Items into list.
             return View(model);
         }
 
 
         public ActionResult Create()
         {
+            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
             return View();
         }
 
@@ -44,6 +46,7 @@ namespace ToDoList.Controllers
         public ActionResult Edit(int id)
         {
             var thisItem = _db.Items.FirstOrDefault(items => items.ItemId == id);
+            ViewBag.CategoryId = new SelectList(_db.Categories, "CategoryId", "Name");
             return View(thisItem);
         }
 
@@ -68,5 +71,6 @@ namespace ToDoList.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
+
     }
 }
