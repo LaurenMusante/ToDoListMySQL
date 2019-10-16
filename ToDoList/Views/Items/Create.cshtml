@@ -16,7 +16,8 @@
             @Html.TextBoxFor(model => model.Description)
 
             @Html.LabelFor(model => model.Category)
-            @Html.DropDownList("CategoryId")
+            @Html.DropDownList("CategoryId") 
+            <!-- ^corresponds to the name attribute of the dropdown list -->
 
             <input type="submit" value="Add new item" class="btn btn-default" />
         }
